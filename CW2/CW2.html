@@ -77,8 +77,17 @@ Esma	33	kadın`
     title.innerText = document.title
     sample.innerText = toList
     inp.value = MOUNT
-    //toList()  //array of objects
+    let aile = toList()
+    console.log(aile.map(i => i.isim))
+    console.log(aile.map(i => i.yas))
+    console.log(aile.map(i => i.cinsiyet))
+    console.log(aile.filter(i => i.cinsiyet=="kadın"))
+    console.log(aile.filter(i => i.cinsiyet=="erkek"))
+    console.log(aile.filter(i => i.yas=="0"))
+    console.log(aile.filter(i => i.yas==!"4"))
+    console.log(aile.map(i => i.index))
+    console.log(aile)
+
 </script>
-<script src="/2022/navbar.js"></script>
 </body>
 </html>
