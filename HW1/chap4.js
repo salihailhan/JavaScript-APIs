@@ -14,12 +14,22 @@ function tableFor(evt) {
   }
   return table;
 }
+function frekansBul(eventname){  
+  let sayi=0;
+  for(let entry of JOURNAL)
+     for(let e of entry.events)
+        if (e.includes(eventname))
+        sayi++;
+    return sayi;
+
+}
 
 function analyze(min=0) {
   return [...EVENTS]
-    .map(e => ({evt: e, cor: phi(tableFor(e))}))
+    .map(e => ({evt: e, cor: phi(tableFor(e)), num:frekansBul(e)}))
     .filter(x => Math.abs(x.cor) > min)
-    .map(x => x.evt+": "+x.cor.toFixed(4))
+    .map(x => x.evt+": "+x.cor.toFixed(4)+"    "+x.num)
+
   // let a = [];
   // for (let e of EVENTS) {
   //   let cor = phi(tableFor(e));
