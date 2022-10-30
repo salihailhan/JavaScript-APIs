@@ -23,7 +23,6 @@ function frekansBul(eventname){
     return sayi;
 
 }
-
 function analyze(min=0) {
   return [...EVENTS]
     .map(e => ({evt: e, cor: phi(tableFor(e)), num:frekansBul(e)}))
