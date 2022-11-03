@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <link rel="icon" href="https://blm-fsmvu.github.io/305/images/icon192.png">
-    <title>Saliha Nur İlhan </title>
+    <title>CW4 : Fetching Remote Files</title>
 
   <style> /* CSS comment */
     body { max-width: 440px; }
     #url { width: 190px; }
-    span, #url { color: rgb(255, 0, 217); }
+    span, #url { color: rgb(0, 0, 255); }
   </style>
 </head>
 
@@ -39,18 +39,20 @@
 "use strict";
 function init() {
     plat.innerText = navigator.platform
-    navigator.geolocation.getCurrentPosition(p =>loc.innerText = 
-     p.coords.latitude.toFixed(4) + ", " + p.coords.longitude.toFixed(4));
-    
-    navigator.getBattery().then(b =>lev.innerText = 
+    navigator.geolocation.getCurrentPosition
+    (p =>loc.innerText = 
+    p.coords.latitude.toFixed(4) + ", " + 
+    p.coords.longitude.toFixed(4));
+    navigator.getBattery().then
+    (b =>lev.innerText = 
     (b.level*100).toFixed(0) + "%");
-    check()
-}
+    check()}
+    
+
 function check() {
       fetch(url.value).then(r => resp.innerText = 
       r.ok? 'OK' : ' Wrong url Link ')
-      .catch(e =>resp.innerText = e)
-}
+      .catch(e =>resp.innerText = e)}
     title.innerText = document.title;
     sample.innerText = init+'\n'+check;
     init();
