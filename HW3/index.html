@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+
+  <body>
+
+    <!-- <div id="image">
+
+        </div> -->
+    <br />
+    <img id="my-img" height="150" />
+    <br />
+   
+  </body>
+
+  <script>
+    let resimsayisi = 12;
+    let index = 1;
+    let setTimeoutreturn;
+    let setTimeOutWorking = false; 
+    let img = document.querySelector("#my-img");
+    function Start() {
+      if (setTimeOutWorking) return;
+      setTimeoutreturn = setTimeout(guncelle, 250); 
+
+      setTimeOutWorking = true;
+    }
+
+    function guncelle() {
+      fetch("../HW3/" + index + ".png")
+        .then((response) => response.blob())
+        .then((imageBlob) => {
+          var urlCreator = window.URL || window.webkitURL;
+          var myObject = urlCreator.createObjectURL(imageBlob);
+          img.src = myObject;
+        });
+
+      index = (index % resimsayisi) + 1; 
+      setTimeOutWorking = false;
+      console.log(index);
+      img.style.marginLeft=index*50+"px";
+      Start();
+    }
+    
+    Start();
+  </script>
+</html>
