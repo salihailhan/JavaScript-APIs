@@ -1,47 +1,117 @@
 <!DOCTYPE html>
 <html>
-  <head> </head>
 
-  <body>
+<body>
+  <button style="background-color:tomato;color:white" id="startbuton" , position: relative>Start</button>
+  <button style="background-color:rgb(71, 117, 255);color:white" id="stopbuton" , position: relative>Stop</button>
+  <button style="background-color:rgb(150, 52, 71);color:white" id="pausebuton" , position: relative>Pause</button>
+  <button style="background-color:rgb(227, 71, 255);color:white" id="nextbuton" , position: relative>Next</button>
+  <button style="background-color:rgb(255, 191, 71);color:white" id="prevbuton" , position: relative>Prev</button>
+  <img id="image">
+</body>
 
-    <!-- <div id="image">
-
-        </div> -->
-    <br />
-    <img id="my-img" height="150" />
-    <br />
-   
-  </body>
-
-  <script>
-    let resimsayisi = 12;
-    let index = 1;
-    let setTimeoutreturn;
-    let setTimeOutWorking = false; 
-    let img = document.querySelector("#my-img");
-    function Start() {
-      if (setTimeOutWorking) return;
-      setTimeoutreturn = setTimeout(guncelle, 250); 
-
-      setTimeOutWorking = true;
+<head>
+  <style>
+    #image {
+      position: fixed;
+      top: 100px;
     }
+  </style>
+</head>
+<script>
+  let image = document.querySelector('#image')
+  let num = 12;
+  let index = 1;
+  let setTimeoutreturn;
+  let situation = true;
+  let setTimeOutWorking = false;
 
-    function guncelle() {
-      fetch("../HW3/" + index + ".png")
-        .then((response) => response.blob())
-        .then((imageBlob) => {
-          var urlCreator = window.URL || window.webkitURL;
-          var myObject = urlCreator.createObjectURL(imageBlob);
-          img.src = myObject;
+  function play() {
+    if (setTimeOutWorking) return;
+    setTimeoutreturn = setTimeout(update, 150);
+    setTimeOutWorking = true;
+  }
+  function update() {
+    if (index > 0 && index < 13) {
+      fetch("https://salihailhan.github.io/JavaScript-APIs/HW3/sprite/" + index + ".png")
+        .then((res) => res.blob())
+        .then((blob) => {
+          var urlyap = window.URL || window.webkitURL;
+          var myObject = urlyap.createObjectURL(blob);
+          image.src = myObject;
         });
-
-      index = (index % resimsayisi) + 1; 
+      index = (index % num) + 1;
       setTimeOutWorking = false;
       console.log(index);
-      img.style.marginLeft=index*50+"px";
-      Start();
+      image.style.marginLeft = index * 60 + "px";
+      play();
     }
-    
-    Start();
-  </script>
-</html>
+  }
+  function contin() {
+    image.style.marginLeft = index * 60 + "px";
+    if (index > 0 && index < 13) {
+      fetch("https://salihailhan.github.io/JavaScript-APIs/HW3/sprite/" + index + ".png")
+        .then((res) => res.blob())
+        .then((blob) => {
+          var urlyap = window.URL || window.webkitURL;
+          var myObject = urlyap.createObjectURL(blob);
+          image.src = myObject;
+        });
+      index = (index % num) + 1;
+      setTimeOutWorking = false;
+      console.log(index);
+    }
+  }
+  function back() {
+    image.style.marginLeft = index * 60 + "px";
+    if (index > 0 && index < 11) {
+      fetch("https://salihailhan.github.io/JavaScript-APIs/HW3/sprite/" + index + ".png")
+        .then((res) => res.blob())
+        .then((blob) => {
+          var urlyap = window.URL || window.webkitURL;
+          var myObject = urlyap.createObjectURL(blob);
+          image.src = myObject;
+        });
+      index = (index % num) - 1;
+      setTimeOutWorking = false;
+      if (index <= 0) {
+        idnex = 1;
+        console.log(index);
+      }
+    }
+  }
+  startbuton.addEventListener("click", function () {
+    setTimeout(play(), 150);
+  });
+  stopbuton.addEventListener("click", function () {
+    clearTimeout(setTimeoutreturn);
+    setTimeOutWorking = false;
+  });
+  pausebuton.addEventListener("click", function () {
+    if (situation) {
+      clearTimeout(setTimeoutreturn);
+      setTimeOutWorking = false;
+      situation = false;
+    } else {
+      setTimeout(play(), 150);
+      situation = true;
+    }
+  });
+  nextbuton.addEventListener("click", function () {
+    if (index > 0 && index < 11) {
+      contin()
+    }
+    if (index < 1 || index > 13) {
+      index = 1;
+      contin()
+    }
+  });
+  prevbuton.addEventListener("click", function () {
+    if (index > 0 && index < 11) {
+      back()
+    }
+    if (index < 1) {
+      back()
+    }
+  });     
+</script>
