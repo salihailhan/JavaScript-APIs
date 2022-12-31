@@ -1,8 +1,8 @@
 {
 	"short_name": "Racer2",
-	"name": "Arcade Racer 2",
+	"name": "Car Race 2",
 	"lang": "en",
-	"description": "A top-down 2D arcade racer.",
+	"description": "Race",
 	"start_url": "./forzahorizon6.html",
 	"background_color": "#323232",
 	"theme_color": "#c60000",
